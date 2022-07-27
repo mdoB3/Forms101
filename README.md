@@ -1,5 +1,7 @@
 # forms101
 Vue Form Handling
+While some interactions occur through clicks and mouse moves,
+it is really through forms where we will get the majority of rich input from user.
 
 ## Project setup
 ```
