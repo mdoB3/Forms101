@@ -2,19 +2,22 @@
   <div id="app">
     <BasicButton />
     <TextInput />
+     <Fields />
   </div>
 </template>
 
 <script>
 import BasicButton from './components/button/BasicButton.vue'
 import TextInput from './components/input/TextInput.vue'
+import Fields from './components/multipleFields/Fields.vue'
 
 export default {
   name: 'App',
   components: {
     BasicButton,
-    TextInput
-  }
+    TextInput,
+    Fields
+    }
 }
 </script>
 
