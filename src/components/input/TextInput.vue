@@ -55,4 +55,9 @@ li {
 a {
   color: #42b983;
 }
+   div {
+    border: 1px solid black;
+    max-width: 30vw;
+    margin: auto;
+   }
 </style>

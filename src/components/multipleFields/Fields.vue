@@ -1,13 +1,17 @@
 <!-- To avoid adding property on each input on data, lets create fields object to store the values for all fields in one place -->
 <template>
    <div>
-      <h2 class="ui header">Add items to List</h2>
+      <h2 class="ui header">Add items to List with Validation</h2>
       <div class="input-form">
          <form @submit="submitForm" class="ui form">
             <div class="field">
                <label>New item</label>
                <input v-model="fields.newItem" type="text" placeholder="Add an item!" />
-               <span style="color: red"> {{ fieldErrors.newItem }}</span>
+                <span style="float: right"> {{ fields.newItem.length }} /20</span>
+                <span style="color: red"> {{ fieldErrors.newItem }}</span>
+                <span v-if="isNewItemInputLimitExceeded"
+                       style="color: red; display: block;">
+                        Must be under twenty characters</span>
             </div>
             <div class="field">
                <label>Email</label>
@@ -23,6 +27,7 @@
                   <option>Urgent</option>
                </select>
                <span style="color: red"> {{ fieldErrors.urgency }}</span>
+                <span v-if="isNotUrgent" style="color: red; display: block;"> Most be moderate to urgent</span>
             </div>
             <div class="field">
                <div class="ui checkbox">
@@ -30,7 +35,7 @@
                   <span style="color: red"> {{ fieldErrors.termsAndConditions }}</span>
                </div>
             </div>
-            <button class="ui button">Submit</button>
+            <button :disabled="isNewItemInputLimitExceeded || isNotUrgent" class="ui button">Submit</button>
          </form>
          <div class="ui segment">
             <h4 class="ui header">Items</h4>
@@ -64,6 +69,16 @@
            },
            items: [],
        }
+     },
+     computed: {
+        // limit of chars for newItem input
+        isNewItemInputLimitExceeded() {
+            return this.fields.newItem.length >= 20;
+        },
+        // return true when fields.urgency is equeal to Nonessential
+        isNotUrgent() {
+            return this.fields.urgency === 'Nonessential'
+        }
      },
      methods: {
         submitForm(evt) {
@@ -115,5 +130,10 @@
    }
    a {
    color: #42b983;
+   }
+   div {
+    border: 1px solid black;
+    max-width: 30vw;
+    margin: auto;
    }
 </style>
